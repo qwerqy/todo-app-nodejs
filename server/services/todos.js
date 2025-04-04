@@ -1,5 +1,5 @@
 const _ = require('lodash')
-const todos = require('../database/todo-queries.js')
+const todos = require('../repositories/todos.js')
 const { addErrorReporting } = require('../utils.js')
 
 function createToDo(req, data) {
