@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { generateToken } = require('../services/jwt')
-
+const { createUser, signInUser } = require('../services/users.js')
 /**
  * @swagger
  * tags:
@@ -54,5 +54,89 @@ router.post('/generate', (req, res) => {
 		res.status(500).json({ error: 'Error generating token' })
 	}
 })
+
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication endpoints
+ * /auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     description: Registers a new user with their email and password
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: User registered successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *       400:
+ *         description: Invalid request body
+ *       409:
+ *         description: User already exists
+ */
+router.post('/register', createUser)
+
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Authentication endpoints
+ * /auth/signin:
+ *   post:
+ *     summary: Sign in a user
+ *     description: Signs in a user with their email and password
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *               - password
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *               password:
+ *                 type: string
+ *                 format: password
+ *     responses:
+ *       200:
+ *         description: User signed in successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *       401:
+ *         description: Invalid credentials
+ */
+router.post('/signin', signInUser)
 
 module.exports = router

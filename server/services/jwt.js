@@ -8,17 +8,15 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
  * Generates a JWT token for a user
  * @param {Object} user - The user object
  * @param {string} user.email - User's email
- * @param {string} user.name - User's name
  * @returns {string} JWT token
  */
 function generateToken(user) {
-	if (!user.email || !user.name) {
-		throw new Error('Email and/or name are required')
+	if (!user.email) {
+		throw new Error('Email is required')
 	}
 
 	const payload = {
 		email: user.email,
-		name: user.name,
 	}
 
 	const options = {

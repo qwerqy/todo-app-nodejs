@@ -42,7 +42,6 @@ describe('JWT Service', () => {
 
 			expect(decoded).toBeDefined()
 			expect(decoded.email).toBe(user.email)
-			expect(decoded.name).toBe(user.name)
 		})
 
 		it('should throw an error when verifying an invalid token', () => {
