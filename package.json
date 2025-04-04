@@ -20,7 +20,9 @@
 		"lodash": "^4.17.15",
 		"nodemon": "^2.0.2",
 		"pg": "^8.14.1",
-		"supertest": "^4.0.2"
+		"supertest": "^4.0.2",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1"
 	},
 	"devDependencies": {
 		"concurrently": "^4.0.1"
